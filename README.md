@@ -20,8 +20,10 @@ I've implemented this as a Flask app in Python 3.7 + Redis, which is tested usin
 To run the Docker image, simply run the following command:
 
 ```
-docker run -p 80:80 .
+docker-compose up
 ```
+
+This spins up our app server running on Flask, and a Redis server - exposing the REST API on port 80. You can perform requests in a REST client or programatically using the routes below.
 
 ### Routes
 
