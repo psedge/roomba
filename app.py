@@ -12,6 +12,8 @@ def run():
     Default route, takes JSON body and runs algorithm to calculate how many
     patches of dirt are swept up by a Roomba following directions.
     '''
+    if not request.is_json:
+        return jsonify(success=False), 400
 
     body = request.get_json()
     try:
