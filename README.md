@@ -15,28 +15,51 @@ I've implemented this as a Flask app in Python 3.7 + Redis, which is tested usin
 * The return values should be the number of patches cleaned, *not* the number remaining.
 * When we exceed the room dimensions, we don't move, we hit the wall for as many directions as we don't progress.
 * If we're persisting to a DB, and this is a functional problem, we can cache responses instead of re-executing. We need to index on a composite key of all inputs.
+* This problem would lend itself to recursion pretty well
 
 ### Getting Started
 
 To run the Docker image, simply run the following command:
 
 ```
-docker-compose up
+docker-compose up -d
 ```
 
 This spins up our app server running on Flask, and a Redis server - exposing the REST API on port 80. You can perform requests in a REST client or programatically using the routes below.
 
+To run the test suite once the service is up, in the root directory:
+
+```
+pytest
+```
+
 ### Routes
 
-The Flask app exposes the following routes:
-
-```
-POST /
+### POST /
+##### Headers
 Content-Type: application/json
-{"roomSize" : [5, 5], "coords" : [1, 2], "patches" : [[1, 0], [2, 2], [2, 3]], "instructions" : "NNESEESWNWW"}
 
-{"coords" : [1, 3], "patches" : 1}
-```
+##### Body
+`{"roomSize" : [5, 5], "coords" : [1, 2], "patches" : [[1, 0], [2, 2], [2, 3]], "instructions" : "NNESEESWNWW"}`
+
+* *roomSize* : A two-element list of the integeric size of the room in the format [x,y]. Defines the maximum bounds for our Roomba.
+* *coords* : A two-element list of the starting position of the Roomba, in the format [x,y].
+* *patches* : A list of lists, two-elements each, integeric. These are the coordinates where we know there to be dirt. Each time the Roomba passes over one of these, we count it as cleaned.
+* *instructions* : a stringified list of North, East, South, and West instructions, determining where the Roomba will travel.
+
+##### Response
+
+200 - Successful
+`{"coords" : [1, 3], "patches" : 1}`
+
+* *coords* : The ending position of the Roomba
+* *patches* : The number of patches we were able to clean in this run
+
+---
+
+400 - Bad Request
+
+The JSON POSTed was in an incorrect format, we couldn't proceed.
 
 ### Expansion
 
