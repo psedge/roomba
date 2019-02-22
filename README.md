@@ -35,9 +35,9 @@ pytest
 
 ### Routes
 
-### POST /
+#### POST /
 ##### Headers
-Content-Type: application/json
+*Content-Type*: application/json
 
 ##### Body
 `{"roomSize" : [5, 5], "coords" : [1, 2], "patches" : [[1, 0], [2, 2], [2, 3]], "instructions" : "NNESEESWNWW"}`
