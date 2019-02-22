@@ -2,7 +2,8 @@
 
 I've been running into some problems recently; I bought a Roomba a few months ago, and although I know the exact dimensions of my room, and the locations of dirt at any one moment (I track it religiously), I simply can't figure out how many patches of dirt would have been swept up if I give it a certain set of directions! I'd also like to persist my Roomba's journies to a DB, so that I can go back and remember the good times.
 
-Sounds like a bit like a programming exercise, doesn't it?
+Sounds like a bit like a programming exercise, doesn't it? 
+https://gist.github.com/alirussell/9a519e07128b7eafcb50
 
 ### The Solution
 
