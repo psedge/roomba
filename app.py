@@ -33,7 +33,7 @@ def run():
     # Detect if we cleaned a patch of dirt
     def clean(position, patches):
         if position in patches:
-            return patches.remove(position)
+            patches.remove(position)
     
     # Clean our starting patch
     clean(position, patches)
